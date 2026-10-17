@@ -5,12 +5,12 @@ from app.core.database import get_db
 
 router = APIRouter()
 
-@router.get("")
-@router.get("/")
+@router.api_route("", methods=["GET", "HEAD"])
+@router.api_route("/", methods=["GET", "HEAD"])
 async def health_check():
     return {"status": "ok"}
 
-@router.get("/db")
+@router.api_route("/db", methods=["GET", "HEAD"])
 async def health_db(db: AsyncSession = Depends(get_db)):
     try:
         await db.execute(text("SELECT 1"))

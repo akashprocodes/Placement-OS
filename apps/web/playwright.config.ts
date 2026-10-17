@@ -1,5 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const PORT = process.env.PLAYWRIGHT_PORT || "3002";
+const BASE_URL = process.env.PLAYWRIGHT_BASE_URL || `http://localhost:${PORT}`;
+
 export default defineConfig({
   testDir: "./e2e",
   globalSetup: "./e2e/global-setup.ts",
@@ -16,7 +19,7 @@ export default defineConfig({
     ["html", { outputFolder: "playwright-report", open: "never" }],
   ],
   use: {
-    baseURL: process.env.PLAYWRIGHT_BASE_URL || "http://localhost:3000",
+    baseURL: BASE_URL,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
@@ -38,9 +41,9 @@ export default defineConfig({
       },
     },
     {
-      command: "pnpm dev",
-      url: "http://localhost:3000",
-      reuseExistingServer: true,
+      command: `pnpm dev --port ${PORT}`,
+      url: `${BASE_URL}/login`,
+      reuseExistingServer: false,
       timeout: 30000,
     },
   ],
