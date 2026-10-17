@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js & Frontend builds
+.next/
+dist/
+out/
+build/
+.vercel/
+
+# Environment files (exclude templates)
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Testing & Reports
+playwright-report/
+test-results/
+coverage/
+
+# Database dumps & local backups
+*.sql
+*.dump
+placement_os_pre_docker_backup.sql
+!docker/postgres/init/*.sql
+
+# OS & Workspace
+.DS_Store
+Thumbs.db
+.turbo/

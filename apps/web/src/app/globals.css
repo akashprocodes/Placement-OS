@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+@layer theme {
+  :root {
+    /* Color System - Phase 3.5 Approved Palette */
+    --color-background-app: #25343F;
+    --color-surface: rgba(191, 201, 209, 0.05); /* Derived from #BFC9D1 */
+    --color-surface-elevated: rgba(191, 201, 209, 0.09);
+    --color-surface-muted: rgba(191, 201, 209, 0.02);
+    
+    --color-text-primary: #EAEFEF;
+    --color-text-secondary: #BFC9D1;
+    --color-text-muted: rgba(191, 201, 209, 0.7);
+    --color-text-disabled: rgba(191, 201, 209, 0.4);
+    --color-text-inverse: #25343F; /* High contrast on orange */
+    
+    /* Brand: Accent Orange */
+    --color-brand-primary: #FF9B51;
+    --color-brand-hover: #FFAE70;
+    --color-brand-active: #E58B49;
+    --color-brand-subtle: rgba(255, 155, 81, 0.15);
+    
+    /* Status Colors (Maintained for accessibility/semantics) */
+    --color-status-success: #22C55E;
+    --color-status-warning: #F59E0B;
+    --color-status-error: #EF4444;
+    --color-status-info: #FF9B51;
+    
+    /* Borders */
+    --color-border-default: rgba(191, 201, 209, 0.15); /* Derived from #BFC9D1 */
+    --color-border-subtle: rgba(191, 201, 209, 0.08);
+    --color-border-strong: rgba(191, 201, 209, 0.3);
+
+    /* Typography Scale */
+    --text-display-size: 3.5rem;
+    --text-display-lh: 1.1;
+    --text-h1-size: 2.5rem;
+    --text-h1-lh: 1.2;
+    --text-h2-size: 2rem;
+    --text-h2-lh: 1.25;
+    --text-h3-size: 1.5rem;
+    --text-h3-lh: 1.3;
+    --text-h4-size: 1.25rem;
+    --text-h4-lh: 1.4;
+    --text-body-large-size: 1.125rem;
+    --text-body-large-lh: 1.5;
+    --text-body-size: 1rem;
+    --text-body-lh: 1.5;
+    --text-body-small-size: 0.875rem;
+    --text-body-small-lh: 1.5;
+    --text-caption-size: 0.75rem;
+    --text-caption-lh: 1.5;
+    --text-label-size: 0.875rem;
+    --text-label-lh: 1.25;
+    --text-button-size: 0.875rem;
+    --text-button-lh: 1.25;
+
+    /* Spacing (8px based) */
+    --space-4: 0.25rem;
+    --space-8: 0.5rem;
+    --space-12: 0.75rem;
+    --space-16: 1rem;
+    --space-20: 1.25rem;
+    --space-24: 1.5rem;
+    --space-32: 2rem;
+    --space-40: 2.5rem;
+    --space-48: 3rem;
+    --space-64: 4rem;
+    --space-80: 5rem;
+
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-pill: 9999px;
+
+    /* Shadows (Soft & Minimal, Dark Mode Tuned) */
+    --shadow-none: 0 0 #0000;
+    --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+    --shadow-elevated: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+
+    /* Layout Tokens */
+    --layout-max-width: 1200px;
+    --layout-page-px: 2rem;
+    --layout-sidebar-width: 280px;
+    --layout-header-height: 64px;
+    --layout-content-gap: 2rem;
+    --layout-card-gap: 1.5rem;
+
+    /* Z-Index */
+    --z-base: 0;
+    --z-dropdown: 50;
+    --z-sticky: 100;
+    --z-overlay: 200;
+    --z-modal: 300;
+    --z-toast: 400;
+
+    /* Motion */
+    --motion-fast: 150ms;
+    --motion-normal: 250ms;
+    --motion-slow: 350ms;
+    --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Dark mode structure setup for future phases */
+  /*
+  @media (prefers-color-scheme: dark) {
+    :root {
+      // Dark mode tokens will be populated here later
+    }
+  }
+  */
+}
+
+@theme {
+  /* Colors */
+  --color-bg-app: var(--color-background-app);
+  --color-bg-surface: var(--color-surface);
+  --color-bg-elevated: var(--color-surface-elevated);
+  --color-bg-muted: var(--color-surface-muted);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-disabled: var(--color-text-disabled);
+  --color-text-inverse: var(--color-text-inverse);
+
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-hover: var(--color-brand-hover);
+  --color-brand-active: var(--color-brand-active);
+  --color-brand-subtle: var(--color-brand-subtle);
+
+  --color-status-success: var(--color-status-success);
+  --color-status-warning: var(--color-status-warning);
+  --color-status-error: var(--color-status-error);
+  --color-status-info: var(--color-status-info);
+
+  --color-border-default: var(--color-border-default);
+  --color-border-subtle: var(--color-border-subtle);
+  --color-border-strong: var(--color-border-strong);
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Typography Sizes */
+  --text-display: var(--text-display-size);
+  --text-display--line-height: var(--text-display-lh);
+  --text-h1: var(--text-h1-size);
+  --text-h1--line-height: var(--text-h1-lh);
+  --text-h2: var(--text-h2-size);
+  --text-h2--line-height: var(--text-h2-lh);
+  --text-h3: var(--text-h3-size);
+  --text-h3--line-height: var(--text-h3-lh);
+  --text-h4: var(--text-h4-size);
+  --text-h4--line-height: var(--text-h4-lh);
+  --text-body-large: var(--text-body-large-size);
+  --text-body-large--line-height: var(--text-body-large-lh);
+  --text-body: var(--text-body-size);
+  --text-body--line-height: var(--text-body-lh);
+  --text-body-small: var(--text-body-small-size);
+  --text-body-small--line-height: var(--text-body-small-lh);
+  --text-caption: var(--text-caption-size);
+  --text-caption--line-height: var(--text-caption-lh);
+  --text-label: var(--text-label-size);
+  --text-label--line-height: var(--text-label-lh);
+  --text-button: var(--text-button-size);
+  --text-button--line-height: var(--text-button-lh);
+
+  /* Spacing */
+  --spacing-4: var(--space-4);
+  --spacing-8: var(--space-8);
+  --spacing-12: var(--space-12);
+  --spacing-16: var(--space-16);
+  --spacing-20: var(--space-20);
+  --spacing-24: var(--space-24);
+  --spacing-32: var(--space-32);
+  --spacing-40: var(--space-40);
+  --spacing-48: var(--space-48);
+  --spacing-64: var(--space-64);
+  --spacing-80: var(--space-80);
+
+  /* Layout */
+  --spacing-layout-max: var(--layout-max-width);
+  --spacing-layout-px: var(--layout-page-px);
+  --spacing-layout-sidebar: var(--layout-sidebar-width);
+  --spacing-layout-header: var(--layout-header-height);
+  --spacing-content-gap: var(--layout-content-gap);
+  --spacing-card-gap: var(--layout-card-gap);
+
+  /* Border Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-pill: var(--radius-pill);
+
+  /* Shadows */
+  --shadow-none: var(--shadow-none);
+  --shadow-subtle: var(--shadow-subtle);
+  --shadow-medium: var(--shadow-medium);
+  --shadow-elevated: var(--shadow-elevated);
+
+  /* Breakpoints */
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-large: 1280px;
+
+  /* Z-Index */
+  --z-base: var(--z-base);
+  --z-dropdown: var(--z-dropdown);
+  --z-sticky: var(--z-sticky);
+  --z-overlay: var(--z-overlay);
+  --z-modal: var(--z-modal);
+  --z-toast: var(--z-toast);
+
+  /* Motion */
+  --animate-duration-fast: var(--motion-fast);
+  --animate-duration-normal: var(--motion-normal);
+  --animate-duration-slow: var(--motion-slow);
+  --animate-ease-standard: var(--easing-standard);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-app);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background-color: var(--color-bg-surface);
+  }
+  @supports (backdrop-filter: blur(8px)) {
+    .glass-panel {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+  }
+
+  .glass-header {
+    background-color: rgba(37, 52, 63, 0.85); /* Solid fallback header */
+  }
+  @supports (backdrop-filter: blur(12px)) {
+    .glass-header {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  }
+}
