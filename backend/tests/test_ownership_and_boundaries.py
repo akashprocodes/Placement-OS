@@ -302,12 +302,38 @@ def test_production_environment_rejects_insecure_jwt_secret():
             JWT_SECRET_KEY="short-secret"
         )
 
-    # Secure 32+ char secret in production succeeds
+    # Secure 32+ char secret in production with valid domain succeeds
     prod_settings = Settings(
         ENVIRONMENT="production",
-        JWT_SECRET_KEY="a-very-long-and-secure-random-secret-key-32-chars-long"
+        JWT_SECRET_KEY="a-very-long-and-secure-random-secret-key-32-chars-long",
+        FRONTEND_URL="https://app.placementos.com"
     )
     assert prod_settings.ENVIRONMENT == "production"
+
+    # Production rejects non-HTTPS origins
+    with pytest.raises(ValueError, match="must use HTTPS in production"):
+        Settings(
+            ENVIRONMENT="production",
+            JWT_SECRET_KEY="a-very-long-and-secure-random-secret-key-32-chars-long",
+            FRONTEND_URL="http://app.placementos.com"
+        )
+
+    # Production rejects localhost, 127.0.0.1, and loopback addresses
+    for invalid_origin in ["http://localhost:3000", "https://localhost:3000", "https://127.0.0.1:3000", "https://[::1]:3000"]:
+        with pytest.raises(ValueError, match="cannot use localhost or loopback addresses in production|must use HTTPS in production"):
+            Settings(
+                ENVIRONMENT="production",
+                JWT_SECRET_KEY="a-very-long-and-secure-random-secret-key-32-chars-long",
+                FRONTEND_URL=invalid_origin
+            )
+
+    # Production handles multiple valid origins and strips trailing slashes
+    multi_settings = Settings(
+        ENVIRONMENT="production",
+        JWT_SECRET_KEY="a-very-long-and-secure-random-secret-key-32-chars-long",
+        FRONTEND_URL="https://app.placementos.com/, https://placementos.com"
+    )
+    assert multi_settings.cors_origins == ["https://app.placementos.com", "https://placementos.com"]
 
     # Staging also rejects insecure or template secrets
     with pytest.raises(ValueError, match="JWT_SECRET_KEY must be a cryptographically secure string"):

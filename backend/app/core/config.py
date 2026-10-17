@@ -3,6 +3,7 @@ from pydantic import model_validator
 from functools import lru_cache
 from typing import List
 import os
+import urllib.parse
 
 env_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
 
@@ -22,7 +23,7 @@ class Settings(BaseSettings):
 
     @property
     def cors_origins(self) -> List[str]:
-        return [origin.strip() for origin in self.FRONTEND_URL.split(",") if origin.strip()]
+        return [origin.strip().rstrip("/") for origin in self.FRONTEND_URL.split(",") if origin.strip()]
 
     @model_validator(mode="after")
     def validate_production_secrets(self) -> "Settings":
@@ -38,6 +39,23 @@ class Settings(BaseSettings):
                 raise ValueError(
                     "JWT_SECRET_KEY must be a cryptographically secure string at least 32 characters long in production"
                 )
+        if self.ENVIRONMENT.lower() == "production":
+            origins = self.cors_origins
+            if not origins:
+                raise ValueError(
+                    "FRONTEND_URL must be set to your production frontend domain in production"
+                )
+            for origin in origins:
+                parsed = urllib.parse.urlparse(origin)
+                if parsed.scheme != "https":
+                    raise ValueError(
+                        f"FRONTEND_URL origin '{origin}' must use HTTPS in production"
+                    )
+                hostname = (parsed.hostname or "").lower()
+                if not hostname or hostname in ("localhost", "127.0.0.1", "0.0.0.0", "::1") or hostname.endswith(".local"):
+                    raise ValueError(
+                        f"FRONTEND_URL origin '{origin}' cannot use localhost or loopback addresses in production"
+                    )
         return self
 
     model_config = SettingsConfigDict(env_file=env_path, env_file_encoding="utf-8")

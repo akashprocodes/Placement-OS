@@ -1,4 +1,5 @@
 import { LearningSearchResult, YouTubeVideo, YouTubePlaylist, LearningProgressResponse, LearningPlanCreate, LearningPlanResponse } from "../types";
+import { getApiBaseUrl } from "@/lib/api";
 
 export async function searchLearningContent(
   query: string,
@@ -7,7 +8,7 @@ export async function searchLearningContent(
   if (!query || query.trim().length === 0) {
     return { query: "", videos: [], playlists: [], nextPageToken: null };
   }
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   let url = `${backendUrl}/api/v1/learning/search?q=${encodeURIComponent(query)}`;
   if (pageToken) {
     url += `&pageToken=${encodeURIComponent(pageToken)}`;
@@ -30,7 +31,7 @@ export async function searchLearningContent(
 }
 
 export async function getYouTubeVideo(videoId: string): Promise<YouTubeVideo> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const url = `${backendUrl}/api/v1/learning/video/${encodeURIComponent(videoId)}`;
   const response = await fetch(url, {
     method: "GET",
@@ -45,7 +46,7 @@ export async function getYouTubeVideo(videoId: string): Promise<YouTubeVideo> {
 }
 
 export async function getYouTubePlaylist(playlistId: string, cookieHeader?: string): Promise<YouTubePlaylist> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const url = `${backendUrl}/api/v1/learning/playlist/${encodeURIComponent(playlistId)}`;
   const headers: Record<string, string> = { "Accept": "application/json" };
   if (cookieHeader) {
@@ -69,12 +70,10 @@ export async function getYouTubePlaylist(playlistId: string, cookieHeader?: stri
 // Uses HttpOnly session cookie — credentials: "include" sends it automatically.
 // No token parameter — the browser owns the session.
 
-const BACKEND_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
-
 export async function getVideoProgress(
   videoId: string
 ): Promise<LearningProgressResponse | null> {
-  const url = `${BACKEND_URL}/api/v1/learning/progress/video/${encodeURIComponent(videoId)}`;
+  const url = `${getApiBaseUrl()}/api/v1/learning/progress/video/${encodeURIComponent(videoId)}`;
   const response = await fetch(url, {
     method: "GET",
     headers: { "Accept": "application/json" },
@@ -91,7 +90,7 @@ export async function upsertVideoProgress(
   progressSeconds: number,
   durationSeconds: number | null
 ): Promise<LearningProgressResponse> {
-  const url = `${BACKEND_URL}/api/v1/learning/progress/video/${encodeURIComponent(videoId)}`;
+  const url = `${getApiBaseUrl()}/api/v1/learning/progress/video/${encodeURIComponent(videoId)}`;
   const body = {
     content_id: videoId,
     content_type: "video",
@@ -118,7 +117,7 @@ export async function upsertVideoProgress(
 export async function createLearningPlan(
   plan: LearningPlanCreate
 ): Promise<LearningPlanResponse> {
-  const url = `${BACKEND_URL}/api/v1/learning/plans`;
+  const url = `${getApiBaseUrl()}/api/v1/learning/plans`;
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -143,7 +142,7 @@ export async function createLearningPlan(
 }
 
 export async function getLearningWorkspace(cookieHeader?: string): Promise<import("../types").LearningWorkspaceResponse> {
-  const url = `${BACKEND_URL}/api/v1/learning/workspace`;
+  const url = `${getApiBaseUrl()}/api/v1/learning/workspace`;
   const headers: Record<string, string> = { "Accept": "application/json" };
   if (cookieHeader) {
     headers["Cookie"] = cookieHeader;
@@ -162,7 +161,7 @@ export async function getLearningWorkspace(cookieHeader?: string): Promise<impor
 }
 
 export async function getLearningPlans(cookieHeader?: string): Promise<LearningPlanResponse[]> {
-  const url = `${BACKEND_URL}/api/v1/learning/plans`;
+  const url = `${getApiBaseUrl()}/api/v1/learning/plans`;
   const headers: Record<string, string> = { "Accept": "application/json" };
   if (cookieHeader) {
     headers["Cookie"] = cookieHeader;
@@ -183,7 +182,7 @@ export async function getVideoPlanContext(
   playlistId?: string,
   cookieHeader?: string
 ): Promise<import("../types").VideoPlanContextResponse> {
-  let url = `${BACKEND_URL}/api/v1/learning/videos/${encodeURIComponent(videoId)}/plan-context`;
+  let url = `${getApiBaseUrl()}/api/v1/learning/videos/${encodeURIComponent(videoId)}/plan-context`;
   if (playlistId) {
     url += `?playlist_id=${encodeURIComponent(playlistId)}`;
   }
@@ -219,7 +218,7 @@ export async function sendLearningSessionHeartbeat(
   status: "active" | "paused" | "ended",
   clientEventAt: string
 ): Promise<void> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const url = `${backendUrl}/api/v1/learning/sessions/heartbeat`;
   
   const response = await fetch(url, {
@@ -250,7 +249,7 @@ export async function sendLearningSessionHeartbeat(
 }
 
 export async function getLearningPlanProgress(planId: string): Promise<import("../types").LearningPlanProgress> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const url = `${backendUrl}/api/v1/learning/plans/${encodeURIComponent(planId)}/progress`;
   
   const response = await fetch(url, {
@@ -273,7 +272,7 @@ export async function getVideoNotes(
   videoId: string,
   noteType?: "note" | "bookmark"
 ): Promise<import("../types").LearningNote[]> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const params = new URLSearchParams();
   if (noteType) params.append("note_type", noteType);
   const qs = params.toString() ? `?${params.toString()}` : "";
@@ -295,7 +294,7 @@ export async function getVideoNotes(
 export async function createLearningNote(
   payload: import("../types").CreateNotePayload
 ): Promise<import("../types").LearningNote> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const url = `${backendUrl}/api/v1/learning/notes`;
 
   const response = await fetch(url, {
@@ -322,7 +321,7 @@ export async function updateLearningNote(
   noteId: string,
   payload: import("../types").UpdateNotePayload
 ): Promise<import("../types").LearningNote> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const url = `${backendUrl}/api/v1/learning/notes/${encodeURIComponent(noteId)}`;
 
   const response = await fetch(url, {
@@ -346,7 +345,7 @@ export async function updateLearningNote(
 }
 
 export async function deleteLearningNote(noteId: string): Promise<void> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const url = `${backendUrl}/api/v1/learning/notes/${encodeURIComponent(noteId)}`;
 
   const response = await fetch(url, {
@@ -365,7 +364,7 @@ export async function deleteLearningNote(noteId: string): Promise<void> {
 export async function getPlanAdaptiveRecommendation(
   planId: string
 ): Promise<import("../types").AdaptivePlanRecommendation> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const url = `${backendUrl}/api/v1/learning/plans/${encodeURIComponent(planId)}/adaptive`;
 
   const response = await fetch(url, {
@@ -384,7 +383,7 @@ export async function getPlanAdaptiveRecommendation(
 }
 
 export async function getLearningMilestones(): Promise<import("../types").UserMilestonesSummary> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const backendUrl = getApiBaseUrl();
   const url = `${backendUrl}/api/v1/learning/milestones`;
 
   const response = await fetch(url, {

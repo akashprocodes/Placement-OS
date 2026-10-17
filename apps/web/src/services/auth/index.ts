@@ -1,4 +1,4 @@
-const BACKEND_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+import { getApiBaseUrl } from "@/lib/api";
 
 export interface CurrentUserResponse {
   id: string;
@@ -14,7 +14,7 @@ export async function getCurrentUser(cookieHeader?: string): Promise<CurrentUser
     if (cookieHeader) {
       headers["Cookie"] = cookieHeader;
     }
-    const res = await fetch(`${BACKEND_URL}/api/v1/auth/me`, {
+    const res = await fetch(`${getApiBaseUrl()}/api/v1/auth/me`, {
       method: "GET",
       headers,
       cache: cookieHeader ? "no-store" : "default",

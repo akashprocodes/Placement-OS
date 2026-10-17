@@ -1,13 +1,12 @@
 import { LearningAnalyticsResponse } from "../types";
-
-const BACKEND_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+import { getApiBaseUrl } from "@/lib/api";
 
 export async function getLearningAnalytics(
   startDate?: string,
   endDate?: string,
   cookieHeader?: string
 ): Promise<LearningAnalyticsResponse> {
-  let url = `${BACKEND_URL}/api/v1/learning/analytics/dashboard`;
+  let url = `${getApiBaseUrl()}/api/v1/learning/analytics/dashboard`;
   const params = new URLSearchParams();
   if (startDate) params.append("start_date", startDate);
   if (endDate) params.append("end_date", endDate);

@@ -18,7 +18,7 @@ services:
       - key: DATABASE_URL
         sync: false
       - key: JWT_SECRET_KEY
-        sync: false
+        generateValue: true
       - key: YOUTUBE_API_KEY
         sync: false
       - key: JWT_ALGORITHM
