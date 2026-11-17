@@ -33,16 +33,18 @@ export default async function VideoPage(props: VideoPageProps) {
   const initialTime = typeof parsedT === "number" && !isNaN(parsedT) && parsedT > 0 ? parsedT : undefined;
 
   return (
-    <div className="flex flex-col w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 gap-0">
-      <Suspense fallback={<VideoLoadingSkeleton />}>
-        <AsyncVideoDetails
-          videoId={videoId}
-          isAuthenticated={isAuthenticated}
-          playlistId={playlistId}
-          cookieHeader={cookieHeader}
-          initialTime={initialTime}
-        />
-      </Suspense>
+    <div className="w-full min-h-full bg-bg-app pb-32">
+      <div className="mx-auto max-w-layout-max px-layout-px py-8 flex flex-col gap-0">
+        <Suspense fallback={<VideoLoadingSkeleton />}>
+          <AsyncVideoDetails
+            videoId={videoId}
+            isAuthenticated={isAuthenticated}
+            playlistId={playlistId}
+            cookieHeader={cookieHeader}
+            initialTime={initialTime}
+          />
+        </Suspense>
+      </div>
     </div>
   );
 }

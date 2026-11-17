@@ -177,18 +177,18 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-[#25343F] border border-[#BFC9D1]/15 rounded-2xl p-6 sm:p-8 flex flex-col gap-8 shadow-sm"
+      className="bg-bg-surface border border-border-default rounded-2xl p-6 sm:p-8 flex flex-col gap-8 shadow-subtle"
     >
       {/* Header Info */}
       <div className="flex flex-col gap-2">
-        <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#FF9B51]">
+        <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brand-primary">
           <Sparkles className="w-4 h-4" />
           <span>Interview Configuration</span>
         </div>
-        <h2 className="text-xl sm:text-2xl font-bold text-[#EAEFEF]">
+        <h2 className="text-xl sm:text-2xl font-bold text-text-primary">
           Set Up Your AI Mock Interview
         </h2>
-        <p className="text-sm text-[#BFC9D1] leading-relaxed">
+        <p className="text-sm text-text-secondary leading-relaxed">
           Configure interview depth, stages, and context. In Phase 5.1, this establishes your session parameters.
         </p>
       </div>
@@ -283,8 +283,8 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
                   key={r.id}
                   className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer text-xs transition-colors ${
                     selectedResumeId === r.id
-                      ? "bg-[#FF9B51]/15 border-[#FF9B51] text-[#EAEFEF]"
-                      : "bg-[#25343F] border-[#BFC9D1]/15 text-[#BFC9D1] hover:bg-[#BFC9D1]/10"
+                      ? "bg-brand-primary/10 border-brand-primary text-text-primary"
+                      : "bg-bg-surface border-border-default text-text-secondary hover:bg-bg-muted"
                   }`}
                 >
                   <div className="flex items-center gap-2.5 truncate">
@@ -293,12 +293,12 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
                       name="resumeSelect"
                       checked={selectedResumeId === r.id}
                       onChange={() => setSelectedResumeId(r.id)}
-                      className="accent-[#FF9B51]"
+                      className="accent-brand-primary"
                     />
-                    <FileText className="w-4 h-4 text-[#FF9B51] shrink-0" />
+                    <FileText className="w-4 h-4 text-brand-primary shrink-0" />
                     <span className="font-medium truncate">{r.filename}</span>
                   </div>
-                  <span className="text-[11px] text-[#BFC9D1]/70 shrink-0">
+                  <span className="text-[11px] text-text-muted shrink-0">
                     {(r.file_size_bytes / 1024).toFixed(0)} KB
                   </span>
                 </label>
@@ -308,11 +308,11 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
 
           {/* Quick upload input */}
           <div className="mt-1">
-            <label className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#25343F] border border-dashed border-[#BFC9D1]/30 hover:border-[#FF9B51] text-xs text-[#EAEFEF] cursor-pointer transition-colors">
+            <label className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-bg-surface border border-dashed border-border-default hover:border-brand-primary text-xs text-text-primary cursor-pointer transition-colors">
               {uploadingResume ? (
-                <Loader2 className="w-4 h-4 animate-spin text-[#FF9B51]" />
+                <Loader2 className="w-4 h-4 animate-spin text-brand-primary" />
               ) : (
-                <Upload className="w-4 h-4 text-[#FF9B51]" />
+                <Upload className="w-4 h-4 text-brand-primary" />
               )}
               <span>{uploadingResume ? "Processing Resume..." : "Upload New Resume File"}</span>
               <input
@@ -329,7 +329,7 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
 
       {/* 3. Target Role & Quick Recommendations */}
       <div className="flex flex-col gap-3">
-        <label htmlFor="targetRoleInput" className="text-sm font-semibold text-[#EAEFEF]">
+        <label htmlFor="targetRoleInput" className="text-sm font-semibold text-text-primary">
           Target Role *
         </label>
         <input
@@ -339,7 +339,7 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
           onChange={(e) => setTargetRole(e.target.value)}
           placeholder="e.g. Senior Frontend Engineer"
           maxLength={100}
-          className="w-full bg-[#25343F] border border-[#BFC9D1]/20 rounded-xl px-4 py-2.5 text-sm text-[#EAEFEF] placeholder-[#BFC9D1]/50 focus:outline-none focus:ring-2 focus:ring-[#FF9B51]/50"
+          className="w-full bg-bg-surface border border-border-default rounded-xl px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-brand-primary/40 focus:border-brand-primary"
         />
         <div className="flex flex-wrap items-center gap-2 pt-1">
           <span className="text-xs text-[#BFC9D1]/70">Popular:</span>
@@ -376,8 +376,8 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
                 onClick={() => setExperienceLevel(lvl.id as ExperienceLevel)}
                 className={`py-2 px-3 rounded-lg text-xs font-medium border text-center transition-colors ${
                   experienceLevel === lvl.id
-                    ? "bg-[#FF9B51]/15 border-[#FF9B51] text-[#FF9B51] font-semibold"
-                    : "bg-[#25343F] border-[#BFC9D1]/15 text-[#BFC9D1] hover:bg-[#BFC9D1]/10"
+                    ? "bg-brand-primary/10 border-brand-primary text-brand-primary font-semibold"
+                    : "bg-bg-surface border-border-default text-text-secondary hover:bg-bg-muted"
                 }`}
               >
                 {lvl.label}
@@ -388,7 +388,7 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
 
         {/* Difficulty */}
         <div className="flex flex-col gap-2.5">
-          <label className="text-sm font-semibold text-[#EAEFEF]">
+          <label className="text-sm font-semibold text-text-primary">
             Difficulty Setting
           </label>
           <div className="grid grid-cols-3 gap-2">
@@ -403,8 +403,8 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
                 onClick={() => setDifficulty(diff.id as InterviewDifficulty)}
                 className={`py-2 px-3 rounded-lg text-xs font-medium border text-center transition-colors ${
                   difficulty === diff.id
-                    ? "bg-[#FF9B51]/15 border-[#FF9B51] text-[#FF9B51] font-semibold"
-                    : "bg-[#25343F] border-[#BFC9D1]/15 text-[#BFC9D1] hover:bg-[#BFC9D1]/10"
+                    ? "bg-brand-primary/10 border-brand-primary text-brand-primary font-semibold"
+                    : "bg-bg-surface border-border-default text-text-secondary hover:bg-bg-muted"
                 }`}
               >
                 {diff.label}
@@ -416,8 +416,8 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
 
       {/* 5. Interview Stages Multi-Select */}
       <div className="flex flex-col gap-3">
-        <label className="text-sm font-semibold text-[#EAEFEF]">
-          Interview Stages <span className="text-xs text-[#BFC9D1]/70 font-normal">(Select all that apply)</span>
+        <label className="text-sm font-semibold text-text-primary">
+          Interview Stages <span className="text-xs text-text-muted font-normal">(Select all that apply)</span>
         </label>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {STAGE_OPTIONS.map((stg) => {
@@ -429,19 +429,19 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
                 onClick={() => handleToggleStage(stg.id)}
                 className={`p-4 rounded-xl border text-left transition-colors flex flex-col justify-between gap-2 ${
                   isChecked
-                    ? "bg-[#FF9B51]/10 border-[#FF9B51]/80 text-[#EAEFEF]"
-                    : "bg-[#25343F] border-[#BFC9D1]/15 text-[#BFC9D1] hover:bg-[#BFC9D1]/10"
+                    ? "bg-brand-primary/10 border-brand-primary text-text-primary"
+                    : "bg-bg-surface border-border-default text-text-secondary hover:bg-bg-muted"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-bold">{stg.label}</span>
                   <CheckCircle2
                     className={`w-4 h-4 ${
-                      isChecked ? "text-[#FF9B51]" : "text-[#BFC9D1]/30"
+                      isChecked ? "text-brand-primary" : "text-text-muted/40"
                     }`}
                   />
                 </div>
-                <p className="text-xs text-[#BFC9D1]/80 leading-relaxed">
+                <p className="text-xs text-text-muted leading-relaxed">
                   {stg.desc}
                 </p>
               </button>
@@ -452,8 +452,8 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
 
       {/* 6. Estimated Duration */}
       <div className="flex flex-col gap-2.5">
-        <label className="text-sm font-semibold text-[#EAEFEF] flex items-center gap-1.5">
-          <Clock className="w-4 h-4 text-[#FF9B51]" />
+        <label className="text-sm font-semibold text-text-primary flex items-center gap-1.5">
+          <Clock className="w-4 h-4 text-brand-primary" />
           <span>Target Duration</span>
         </label>
         <div className="flex flex-wrap items-center gap-2.5">
@@ -464,8 +464,8 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
               onClick={() => setDurationMinutes(mins)}
               className={`px-4 py-2 rounded-lg text-xs font-medium border transition-colors ${
                 durationMinutes === mins
-                  ? "bg-[#FF9B51]/15 border-[#FF9B51] text-[#FF9B51] font-semibold"
-                  : "bg-[#25343F] border-[#BFC9D1]/15 text-[#BFC9D1] hover:bg-[#BFC9D1]/10"
+                  ? "bg-brand-primary/10 border-brand-primary text-brand-primary font-semibold"
+                  : "bg-bg-surface border-border-default text-text-secondary hover:bg-bg-muted"
               }`}
             >
               {mins} minutes
@@ -475,11 +475,11 @@ export function InterviewSetupForm({ initialResumes = [] }: InterviewSetupFormPr
       </div>
 
       {/* Submit Button */}
-      <div className="pt-4 border-t border-[#BFC9D1]/10 flex items-center justify-end">
+      <div className="pt-4 border-t border-border-subtle flex items-center justify-end">
         <button
           type="submit"
           disabled={submitting}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#FF9B51] text-[#25343F] hover:bg-[#FF9B51]/90 font-bold text-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FF9B51]/50 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-primary text-text-inverse hover:bg-brand-hover font-bold text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-primary/50 disabled:opacity-50 active:scale-95 cursor-pointer shadow-subtle"
         >
           {submitting ? (
             <>

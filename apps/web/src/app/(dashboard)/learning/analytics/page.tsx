@@ -14,18 +14,20 @@ export default async function LearningAnalyticsPage() {
   const isAuthenticated = cookieStore.has("access_token");
 
   return (
-    <div className="flex flex-col gap-8 p-8 max-w-[1200px] mx-auto w-full">
-      <div className="w-full max-w-5xl mx-auto mb-4">
-        <Link
-          href="/learning"
-          className="inline-flex items-center gap-2 text-[#BFC9D1] hover:text-[#FF9B51] transition-colors text-sm font-medium focus:outline-none"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to My Learning
-        </Link>
+    <div className="w-full min-h-full bg-bg-app pb-32">
+      <div className="mx-auto max-w-layout-max px-layout-px py-8 flex flex-col gap-8">
+        <div className="w-full mb-2">
+          <Link
+            href="/learning"
+            className="inline-flex items-center gap-2 text-text-muted hover:text-brand-primary transition-colors text-xs sm:text-sm font-semibold focus:outline-none"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Learning Hub
+          </Link>
+        </div>
+        
+        <LearningAnalytics isAuthenticated={isAuthenticated} />
       </div>
-      
-      <LearningAnalytics isAuthenticated={isAuthenticated} />
     </div>
   );
 }

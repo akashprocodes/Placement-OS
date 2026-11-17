@@ -39,22 +39,24 @@ export default async function PlaylistPage(props: PlaylistPageProps) {
   const isAuthenticated = cookieStore.has("access_token");
 
   return (
-    <div className="flex flex-col w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 gap-0">
-      <Link
-        href="/learning"
-        className="inline-flex items-center gap-2 text-[#BFC9D1] hover:text-[#FF9B51] transition-colors font-medium mb-6 w-fit focus:outline-none focus:ring-2 focus:ring-[#FF9B51]/40 rounded text-sm"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back to Learning
-      </Link>
+    <div className="w-full min-h-full bg-bg-app pb-32">
+      <div className="mx-auto max-w-layout-max px-layout-px py-8 flex flex-col gap-0">
+        <Link
+          href="/learning"
+          className="inline-flex items-center gap-2 text-[#BFC9D1] hover:text-[#FF9B51] transition-colors font-medium mb-6 w-fit focus:outline-none focus:ring-2 focus:ring-[#FF9B51]/40 rounded text-sm"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Learning
+        </Link>
 
-      <Suspense fallback={<PlaylistLoadingSkeleton />}>
-        <AsyncPlaylistDetails
-          playlistId={playlistId}
-          isAuthenticated={isAuthenticated}
-          cookieHeader={cookieStore.toString()}
-        />
-      </Suspense>
+        <Suspense fallback={<PlaylistLoadingSkeleton />}>
+          <AsyncPlaylistDetails
+            playlistId={playlistId}
+            isAuthenticated={isAuthenticated}
+            cookieHeader={cookieStore.toString()}
+          />
+        </Suspense>
+      </div>
     </div>
   );
 }

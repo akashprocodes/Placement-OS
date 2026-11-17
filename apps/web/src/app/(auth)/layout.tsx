@@ -6,7 +6,11 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-full w-full flex items-center justify-center bg-bg-app">
+    <div
+      data-theme="light"
+      style={{ colorScheme: "light" }}
+      className="relative min-h-screen w-full flex items-center justify-center bg-[#E3E5EA] text-[#0A0B0D] overflow-hidden select-none"
+    >
       {children}
     </div>
   );

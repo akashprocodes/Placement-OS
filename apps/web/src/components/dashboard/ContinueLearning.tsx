@@ -1,6 +1,7 @@
 import React from "react";
 import { BookOpen, Play, Calendar, Lock, CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { StarBorder } from "@/components/ui/StarBorder";
 import { LearningPlanWithProgress } from "@/features/learning/types";
 import { formatDuration } from "@/features/learning/utils/duration";
 import { formatTimestamp } from "@/features/learning/utils/timestamp";
@@ -29,12 +30,15 @@ export function ContinueLearning({ isAuthenticated = false, activePlans = [] }: 
           <p className="text-body-small text-text-muted max-w-sm mb-24">
             Create an account or sign in to save learning plans, track your daily goals, and resume videos right where you left off.
           </p>
-          <Link
+          <StarBorder
             href="/login?callbackUrl=/"
-            className="px-24 py-12 bg-brand-primary hover:bg-brand-hover text-text-inverse text-body-small font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary/40 shadow-subtle inline-block"
+            color="#FF9B51"
+            trailColor="#FFAE70"
+            sparkle
+            className="px-24 py-12 text-body-small font-semibold rounded-xl shadow-subtle inline-block"
           >
             Sign In
-          </Link>
+          </StarBorder>
         </div>
       </section>
     );
@@ -58,12 +62,14 @@ export function ContinueLearning({ isAuthenticated = false, activePlans = [] }: 
           <p className="text-body-small text-text-muted max-w-sm mb-24">
             Search for a topic to start your guided learning journey and create your first plan.
           </p>
-          <Link
+          <StarBorder
             href="/learning"
-            className="px-24 py-12 bg-brand-primary hover:bg-brand-hover text-text-inverse text-body-small font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary/40 shadow-subtle inline-block"
+            color="#FF9B51"
+            trailColor="#FFAE70"
+            className="px-24 py-12 text-body-small font-medium rounded-xl shadow-subtle inline-block"
           >
             Start Learning
-          </Link>
+          </StarBorder>
         </div>
       </section>
     );
@@ -212,13 +218,16 @@ export function ContinueLearning({ isAuthenticated = false, activePlans = [] }: 
             </div>
           )}
 
-          <Link
+          <StarBorder
             href={resumeHref}
-            className="px-24 py-12 bg-brand-primary hover:bg-brand-hover text-text-inverse font-semibold text-body-small rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary/40 shadow-subtle inline-flex items-center justify-center gap-8 ml-auto"
+            color="#FF9B51"
+            trailColor="#FFAE70"
+            sparkle
+            className="px-24 py-12 font-semibold text-body-small rounded-xl shadow-subtle inline-flex items-center justify-center gap-8 ml-auto"
           >
             <Play className="w-16 h-16 fill-current" />
             <span>Resume Learning</span>
-          </Link>
+          </StarBorder>
         </div>
       </div>
     </section>

@@ -1,35 +1,43 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer theme {
   :root {
-    /* Color System - Phase 3.5 Approved Palette */
-    --color-background-app: #25343F;
-    --color-surface: rgba(191, 201, 209, 0.05); /* Derived from #BFC9D1 */
-    --color-surface-elevated: rgba(191, 201, 209, 0.09);
-    --color-surface-muted: rgba(191, 201, 209, 0.02);
+    color-scheme: light;
+
+    /* Base theme: Light (Dribbble Glass UI Aesthetic) */
+    --color-background-app: #E3E5EA; /* Light smooth cool silver canvas */
+    --color-surface: rgba(255, 255, 255, 0.82); /* Crisp frosted glass surface */
+    --color-surface-elevated: #FFFFFF;
+    --color-surface-muted: rgba(0, 0, 0, 0.03);
     
-    --color-text-primary: #EAEFEF;
-    --color-text-secondary: #BFC9D1;
-    --color-text-muted: rgba(191, 201, 209, 0.7);
-    --color-text-disabled: rgba(191, 201, 209, 0.4);
-    --color-text-inverse: #25343F; /* High contrast on orange */
+    --color-text-primary: #0A0B0D; /* Pitch black typography */
+    --color-text-secondary: #3F3F46; /* Zinc-700 secondary */
+    --color-text-muted: #71717A; /* Zinc-500 */
+    --color-text-disabled: #A1A1AA;
+    --color-text-inverse: #FFFFFF;
     
-    /* Brand: Accent Orange */
-    --color-brand-primary: #FF9B51;
-    --color-brand-hover: #FFAE70;
-    --color-brand-active: #E58B49;
-    --color-brand-subtle: rgba(255, 155, 81, 0.15);
+    /* Brand: Clean Pitch Black Pill from reference UI */
+    --color-brand-primary: #0A0B0D;
+    --color-brand-hover: #18181B;
+    --color-brand-active: #27272A;
+    --color-brand-subtle: rgba(10, 11, 13, 0.08);
     
-    /* Status Colors (Maintained for accessibility/semantics) */
-    --color-status-success: #22C55E;
-    --color-status-warning: #F59E0B;
-    --color-status-error: #EF4444;
-    --color-status-info: #FF9B51;
+    /* Status Colors */
+    --color-status-success: #16A34A;
+    --color-status-warning: #D97706;
+    --color-status-error: #DC2626;
+    --color-status-info: #0A0B0D;
     
     /* Borders */
-    --color-border-default: rgba(191, 201, 209, 0.15); /* Derived from #BFC9D1 */
-    --color-border-subtle: rgba(191, 201, 209, 0.08);
-    --color-border-strong: rgba(191, 201, 209, 0.3);
+    --color-border-default: rgba(255, 255, 255, 0.85); /* Clean glass highlight */
+    --color-border-subtle: rgba(0, 0, 0, 0.06);
+    --color-border-strong: rgba(0, 0, 0, 0.15);
+
+    /* Dynamic UI surfaces */
+    --glass-header-bg: rgba(255, 255, 255, 0.75);
+    --grid-tech-color: rgba(0, 0, 0, 0.03);
 
     /* Typography Scale */
     --text-display-size: 3.5rem;
@@ -104,14 +112,81 @@
     --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Dark mode structure setup for future phases */
-  /*
-  @media (prefers-color-scheme: dark) {
-    :root {
-      // Dark mode tokens will be populated here later
-    }
+  /* Explicit Dark Mode */
+  :root[data-theme="dark"],
+  :root:has(> head > meta[name="color-scheme"][content="dark"]),
+  .dark {
+    color-scheme: dark;
+    --color-background-app: #05060A;
+    --color-surface: rgba(191, 201, 209, 0.05);
+    --color-surface-elevated: rgba(191, 201, 209, 0.09);
+    --color-surface-muted: rgba(191, 201, 209, 0.02);
+    
+    --color-text-primary: #EAEFEF;
+    --color-text-secondary: #BFC9D1;
+    --color-text-muted: rgba(191, 201, 209, 0.7);
+    --color-text-disabled: rgba(191, 201, 209, 0.4);
+    --color-text-inverse: #05060A;
+    
+    --color-brand-primary: #FF9B51;
+    --color-brand-hover: #FFAE70;
+    --color-brand-active: #E58B49;
+    --color-brand-subtle: rgba(255, 155, 81, 0.15);
+    
+    --color-status-success: #22C55E;
+    --color-status-warning: #F59E0B;
+    --color-status-error: #EF4444;
+    --color-status-info: #FF9B51;
+    
+    --color-border-default: rgba(191, 201, 209, 0.15);
+    --color-border-subtle: rgba(191, 201, 209, 0.08);
+    --color-border-strong: rgba(191, 201, 209, 0.3);
+
+    --glass-header-bg: rgba(5, 6, 10, 0.85);
+    --grid-tech-color: rgba(255, 255, 255, 0.06);
+
+    --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+    --shadow-elevated: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
   }
-  */
+
+  /* Light Mode - Exact Dribbble Glass UI Palette */
+  :root[data-theme="light"],
+  :root:has(> head > meta[name="color-scheme"][content="light"]),
+  .light {
+    color-scheme: light;
+    --color-background-app: #E3E5EA; /* Light smooth cool silver canvas */
+    --color-surface: rgba(255, 255, 255, 0.82); /* Crisp frosted glass surface */
+    --color-surface-elevated: #FFFFFF;
+    --color-surface-muted: rgba(0, 0, 0, 0.03);
+    
+    --color-text-primary: #0A0B0D; /* Pitch black typography */
+    --color-text-secondary: #3F3F46; /* Zinc-700 secondary */
+    --color-text-muted: #71717A; /* Zinc-500 */
+    --color-text-disabled: #A1A1AA;
+    --color-text-inverse: #FFFFFF;
+    
+    --color-brand-primary: #0A0B0D; /* Pitch black primary pill */
+    --color-brand-hover: #18181B;
+    --color-brand-active: #27272A;
+    --color-brand-subtle: rgba(10, 11, 13, 0.08);
+    
+    --color-status-success: #16A34A;
+    --color-status-warning: #D97706;
+    --color-status-error: #DC2626;
+    --color-status-info: #0A0B0D;
+    
+    --color-border-default: rgba(255, 255, 255, 0.95); /* Clean glass highlight */
+    --color-border-subtle: rgba(0, 0, 0, 0.04);
+    --color-border-strong: rgba(0, 0, 0, 0.12);
+
+    --glass-header-bg: rgba(255, 255, 255, 0.85);
+    --grid-tech-color: rgba(0, 0, 0, 0.02);
+
+    --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    --shadow-elevated: 0 20px 50px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  }
 }
 
 @theme {
@@ -246,12 +321,41 @@
   }
 
   .glass-header {
-    background-color: rgba(37, 52, 63, 0.85); /* Solid fallback header */
+    background-color: var(--glass-header-bg, rgba(5, 6, 10, 0.85)); /* Dynamic theme header */
   }
   @supports (backdrop-filter: blur(12px)) {
     .glass-header {
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
+  }
+
+  .bg-grid-tech {
+    background-image: radial-gradient(circle, var(--grid-tech-color, rgba(255, 255, 255, 0.06)) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Magic UI Meteors animation - Ethereal Shooting Stars */
+  @keyframes meteor {
+    0% {
+      transform: rotate(var(--angle, 290deg)) translateX(0);
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(var(--angle, 290deg)) translateX(-850px);
+      opacity: 0;
+    }
+  }
+
+  .animate-meteor {
+    animation-name: meteor;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
   }
 }

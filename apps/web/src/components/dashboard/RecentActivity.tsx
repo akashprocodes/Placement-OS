@@ -1,6 +1,7 @@
 import React from "react";
 import { Activity, Play, Lock, AlertCircle, ArrowRight, ListVideo } from "lucide-react";
 import Link from "next/link";
+import { StarBorder } from "@/components/ui/StarBorder";
 import { RecentActivityRecord } from "@/features/learning/types";
 import { formatDuration } from "@/features/learning/utils/duration";
 
@@ -49,12 +50,14 @@ export function RecentActivity({
           <p className="text-body-small text-text-muted max-w-sm mb-20">
             Your recent study sessions and completed video milestones will appear here.
           </p>
-          <Link
+          <StarBorder
             href="/login?callbackUrl=/"
-            className="px-20 py-10 bg-brand-primary hover:bg-brand-hover text-text-inverse text-body-small font-semibold rounded-lg transition-colors inline-block shadow-subtle"
+            color="#FF9B51"
+            trailColor="#FFAE70"
+            className="px-20 py-10 text-body-small font-semibold rounded-lg shadow-subtle inline-block"
           >
             Sign In
-          </Link>
+          </StarBorder>
         </div>
       </section>
     );

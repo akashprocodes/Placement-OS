@@ -7,27 +7,21 @@ interface DashboardHeroProps {
 }
 
 export function DashboardHero({ isAuthenticated = false, userEmail }: DashboardHeroProps) {
-  const hour = new Date().getHours();
-  const timeOfDay = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
-  
   let displayName = "";
   if (userEmail) {
     const rawName = userEmail.split("@")[0];
     displayName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
   }
 
-  const title = isAuthenticated && displayName ? `${timeOfDay}, ${displayName}` : "Welcome to Placement OS";
+  const title = isAuthenticated && displayName ? `Hello, ${displayName}` : "Hello";
 
   return (
     <section className="flex flex-col lg:flex-row lg:items-center justify-between gap-24 py-8">
       {/* Left: Greeting */}
-      <div className="flex flex-col gap-8">
+      <div>
         <h1 className="text-h2 font-bold text-text-primary tracking-tight">
           {title} <span className="inline-block animate-wave">👋</span>
         </h1>
-        <p className="text-body text-text-secondary">
-          Keep building the skills that move you closer to your placement.
-        </p>
       </div>
 
       {/* Right: Quote Card */}

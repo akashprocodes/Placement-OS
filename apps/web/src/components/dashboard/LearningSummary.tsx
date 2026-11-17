@@ -1,6 +1,7 @@
 import React from "react";
 import { BookOpen, Lock, AlertCircle, ArrowRight, CheckCircle2, Clock } from "lucide-react";
 import Link from "next/link";
+import { StarBorder } from "@/components/ui/StarBorder";
 import { LearningPlanWithProgress } from "@/features/learning/types";
 import { formatDuration } from "@/features/learning/utils/duration";
 
@@ -29,12 +30,14 @@ export function LearningSummary({
           <p className="text-caption text-text-muted mb-12">
             Track daily study goals, active learning plans, and course debt.
           </p>
-          <Link
+          <StarBorder
             href="/login?callbackUrl=/"
-            className="px-16 py-6 bg-brand-primary hover:bg-brand-hover text-text-inverse text-caption font-semibold rounded-lg transition-colors inline-block"
+            color="#FF9B51"
+            trailColor="#FFAE70"
+            className="px-16 py-6 text-caption font-semibold rounded-lg inline-block"
           >
             Sign In
-          </Link>
+          </StarBorder>
         </div>
       </div>
     );

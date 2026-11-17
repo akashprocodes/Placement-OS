@@ -32,7 +32,7 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: "cd ../../backend && DATABASE_URL=\"postgresql+asyncpg://placement_os:placement_os_dev@localhost:5434/test_placement_os\" .venv/bin/uvicorn app.main:app --port 8000 --host 127.0.0.1",
+      command: "cd ../backend && DATABASE_URL=\"postgresql+asyncpg://placement_os:placement_os_dev@localhost:5434/test_placement_os\" .venv/bin/uvicorn app.main:app --port 8000 --host 127.0.0.1",
       url: "http://127.0.0.1:8000/docs",
       reuseExistingServer: true,
       timeout: 30000,

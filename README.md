@@ -9,19 +9,19 @@ Placement OS is an open-architecture engineering career operating system. The cu
 Placement OS is organized as a monorepo:
 
 - **`apps/web/`**: Next.js 16 (Turbopack), React 19, TypeScript, Tailwind CSS v4, Lucide icons.
-- **`backend/`**: FastAPI (Python 3.12+), SQLAlchemy (asyncpg), Alembic, Pydantic v2.
+- **`apps/backend/`**: FastAPI (Python 3.12+), SQLAlchemy (asyncpg), Alembic, Pydantic v2.
 - **Database**: PostgreSQL 16+ (Local Docker container or hosted Neon serverless).
 
 ```
 Placement-OS/
 ├── apps/
+│   ├── backend/               # FastAPI backend service
+│   │   ├── alembic/           # Database migrations (11 linear revisions)
+│   │   ├── app/               # API routes, models, schemas, and services
+│   │   └── tests/             # Pytest test suite (172 tests)
 │   └── web/                   # Next.js frontend application
 │       ├── e2e/               # Playwright browser end-to-end tests
 │       └── src/               # Application routes, components, and hooks
-├── backend/                   # FastAPI backend service
-│   ├── alembic/               # Database migrations (11 linear revisions)
-│   ├── app/                   # API routes, models, schemas, and services
-│   └── tests/                 # Pytest test suite (172 tests)
 ├── docker/                    # Docker container configuration & init scripts
 ├── docker-compose.yml         # Local PostgreSQL development setup
 ├── render.yaml                # Render Blueprint for zero-cost backend hosting
@@ -45,7 +45,7 @@ docker compose up -d
 
 ### 3. Backend Setup
 ```bash
-cd backend
+cd apps/backend
 
 # Create and activate virtual environment
 python3 -m venv .venv
@@ -85,7 +85,7 @@ Frontend will be available at `http://localhost:3000`.
 
 ### Backend Test Suite
 ```bash
-cd backend
+cd apps/backend
 .venv/bin/pytest tests/ -q
 # 172 tests passed
 ```

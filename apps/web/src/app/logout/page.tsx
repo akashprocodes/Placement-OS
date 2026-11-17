@@ -1,12 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 export default function LogoutPage() {
-  const router = useRouter();
-
   useEffect(() => {
     async function performLogout() {
       try {
@@ -14,12 +11,12 @@ export default function LogoutPage() {
       } catch (err) {
         console.error("Logout error:", err);
       } finally {
-        router.push("/login");
-        router.refresh();
+        // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+        window.location.href = "/";
       }
     }
     performLogout();
-  }, [router]);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-bg-app text-text-primary gap-16">

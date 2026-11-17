@@ -3,7 +3,7 @@ import path from "path";
 
 export default async function globalSetup() {
   const seedScriptPath = path.resolve(__dirname, "seed_e2e_data.py");
-  const backendDir = path.resolve(__dirname, "../../../backend");
+  const backendDir = path.resolve(__dirname, "../../backend");
   const pythonPath = path.resolve(backendDir, ".venv/bin/python");
 
   console.log("\n[Playwright globalSetup] Ensuring test database isolation and seeding test records...");
